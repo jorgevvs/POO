@@ -17,13 +17,8 @@ int main(void){
    novoCupom.setPreco(300);
    novoCupom.setQuant(3);
 
-
-
-
    std::cout << "\nO produto " << novoCupom.getId() << " no valor de R$" << novoCupom.getPreco() << " está disponível!!" << std::endl;
    std::cout << "Sua compra de " << novoCupom.getQuant() << " items, terá o valor total de R$"<< novoCupom.calculaCupom() << std::endl;
-
-
 
    std::cout << "==============================================\n" << std::endl;
 
@@ -34,11 +29,7 @@ int main(void){
    novoCupom.setQuant(10);
    novoCupom.setPreco(novoCupom.getPreco() - (novoCupom.getPreco() * 0.05));
 
-
-   
    std::cout << "Sua compra de " << novoCupom.getQuant() << " items, terá o valor total de R$"<< novoCupom.calculaCupom() << std::endl;
-
-
 
    std::cout << "\n============== Volte Sempre ==============" << std::endl;
 
