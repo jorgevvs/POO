@@ -4,8 +4,8 @@
 
 int main(void){
     HugeInteger num, num2, num3;
-    num.input("500");
-    num2.input("500");
+    num.input("999");
+    num2.input("999");
     num3.input("1000");
 
     std::cout << "Num1: ";
@@ -37,4 +37,4 @@ int main(void){
 
 
     return 0;
-}
+} // g++ -Wall -std=c++17 main.cpp Huge.cpp -o main && ./main

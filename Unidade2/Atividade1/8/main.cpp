@@ -14,4 +14,4 @@ int main(void){
 
 
     return 0;
-}
+} // g++ -Wall -std=c++17 main.cpp Retangulo.cpp -o main && ./main
