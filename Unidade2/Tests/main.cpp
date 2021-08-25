@@ -2,14 +2,10 @@
 
 int main (void)
 {
+    int x = 30, y = 27;
+    double z = y / x;
 
-char number[40];
-
-number[0] = 'A';
-number[1] = 'B';
-
-std::cout <<  sizeof(number) << std::endl;
-
+    std::cout << z;
 
 
 
