@@ -1,0 +1,10 @@
+4 int
+8 double
+2 short
+8 long
+4 unsigned
+4 signed
+1 char
+1 bool
+4 float
+16 longdouble
