@@ -15,19 +15,7 @@ struct DADO{
     int tamanho;
 };
 
-void exibeDados(){
-    ifstream fin("dados.dat", ios::in);
-
-    DADO x;
-    cout << "  TIPO DE DADO           VALOR EM BYTE" << endl;
-
-    while (fin >> x.tipo >> x.tamanho){
-        cout << setw(12) << x.tipo << setw(20) << x.tamanho << endl;
-    }
-    fin.close();
-}
-
-int main(){
+void salvaDados(){
     ofstream fout("dados.dat", ios::out);
 
     fout << "int" << ' ' << sizeof(int) << endl;
@@ -42,6 +30,22 @@ int main(){
     fout << "longdouble" << ' ' << sizeof(long double) << endl;
 
     fout.close();
+}
+
+void exibeDados(){
+    ifstream fin("dados.dat", ios::in);
+
+    DADO x;
+    cout << "  TIPO DE DADO           VALOR EM BYTE" << endl;
+
+    while (fin >> x.tipo >> x.tamanho){
+        cout << setw(12) << x.tipo << setw(20) << x.tamanho << endl;
+    }
+    fin.close();
+}
+
+int main(){
+    salvaDados();
  
     exibeDados();
 
