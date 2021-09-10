@@ -8,50 +8,41 @@ using std::setw;
 #include <fstream>
 using std::ifstream;
 using std::ofstream;
+using std::ios;
 
-struct TIPOS_DADOS{
-    char dado[15];
-    int byte;
+struct DADO{
+    char tipo[10];
+    int tamanho;
 };
 
-
-void salvaDados(TIPOS_DADOS c[], int n){
-    ofstream fout("tiposDeDados.dat", std::ios::out);
-
-    for (int i = 0; i < n; i++)
-        fout << c[i].byte << ' ' << c[i].dado << endl;
-
-    fout.close();
-}
-
 void exibeDados(){
-    ifstream fin("tiposDeDados.dat", std::ios::in);
-    TIPOS_DADOS c;
+    ifstream fin("dados.dat", ios::in);
 
+    DADO x;
     cout << "  TIPO DE DADO           VALOR EM BYTE" << endl;
 
-    while (fin >> c.byte >> c.dado){
-        cout << setw(10) << c.dado << setw(22) << c.byte  << endl;
+    while (fin >> x.tipo >> x.tamanho){
+        cout << setw(12) << x.tipo << setw(20) << x.tamanho << endl;
     }
     fin.close();
 }
 
 int main(){
-    TIPOS_DADOS dados[10] = {
-    {"int", sizeof(int)},
-    {"double", sizeof(double)},
-    {"short", sizeof(short)},
-    {"long", sizeof(long)},
-    {"unsigned", sizeof(unsigned)},
-    {"signed", sizeof(signed)},
-    {"char", sizeof(char)},
-    {"bool", sizeof(bool)},
-    {"float", sizeof(float)},
-    {"longdouble", sizeof(long double)}
-    };
+    ofstream fout("dados.dat", ios::out);
 
-    salvaDados(dados, 10);
+    fout << "int" << ' ' << sizeof(int) << endl;
+    fout << "double" << ' ' << sizeof(double) << endl;
+    fout << "short" << ' ' << sizeof(short) << endl;
+    fout << "long" << ' ' << sizeof(long) << endl;
+    fout << "unsigned" << ' ' << sizeof(unsigned) << endl;
+    fout << "signed" << ' ' << sizeof(signed) << endl;
+    fout << "char" << ' ' << sizeof(char) << endl;
+    fout << "bool" << ' ' << sizeof(bool) << endl;
+    fout << "float" << ' ' << sizeof(float) << endl;
+    fout << "longdouble" << ' ' << sizeof(long double) << endl;
 
+    fout.close();
+ 
     exibeDados();
 
     return 0;

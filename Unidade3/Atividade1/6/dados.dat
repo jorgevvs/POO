@@ -1,0 +1,10 @@
+int 4
+double 8
+short 2
+long 8
+unsigned 4
+signed 4
+char 1
+bool 1
+float 4
+longdouble 16
