@@ -13,8 +13,8 @@ ContaLimite::ContaLimite(long int numero, Pessoa &correntista, double saldo, dou
 
 void ContaLimite::operator<<(double valor){
   this->saldo += valor;
-  Transacao x("08/09/2021", valor, "Crédito");
-  this->transacoes[this->cont] = x;
+  Transacao x("15/10/2021", valor, "Crédito");
+  this->transacoes.push_back(x);
   cont++;
 }
 
@@ -22,8 +22,8 @@ void ContaLimite::operator>>(double valor){
   try{
     if(this->saldo + this->limite > valor){
       this->saldo -= valor;
-      Transacao x("07/09/2021", valor, "Débito");
-      this->transacoes[this->cont] = x;
+      Transacao x("15/10/2021", valor, "Débito");
+      this->transacoes.push_back(x);
       cont++;
     }else{
       throw ExcedeLimite();

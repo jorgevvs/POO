@@ -12,6 +12,8 @@ using std::string;
 #include <list>
 using std::list;
 
+#include <vector>
+using std::vector;
 
 class Conta{
 
@@ -23,6 +25,10 @@ public:
   virtual void operator>>(double){};
 
   virtual void extrato() {};
+
+  virtual long int getNumero(){ return this->numero ;};
+  virtual double getSaldo(){ return this->saldo ;};
+  virtual Pessoa getCorrentista(){ return *this->correntista ;};
  
   // virtual void transferir(float, long int) = 0;
 
@@ -30,7 +36,7 @@ protected:
   Pessoa *correntista;
   double saldo;
   long int numero;
-  Transacao transacoes[100];
+  vector<Transacao> transacoes;
   int cont = 0;
 };
 

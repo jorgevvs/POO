@@ -13,6 +13,9 @@ using std::endl;
 #include <list>
 using std::list;
 
+#include <vector>
+using std::vector;
+
 int main(){
     PessoaFisica p1("Thales Luiz", 22642763812);
     PessoaJuridica p2("Robertinho" , 5283755323, "LGTB");
@@ -28,15 +31,23 @@ int main(){
     for(auto &el : lista){
         cout << el.getNome() << endl;
     }
+    int x= 0;
 
     list<Conta> listaConta;
 
     listaConta.push_back(c1);
     listaConta.push_back(c2);
 
+    
     for(auto &el : listaConta){
-        el.extrato();
+        if(el.getNumero() == 420131)
+            x +=1;
     }
+    cout << x << endl;
+
+
+    c1 << 1000;
+    c1.extrato();
 
     return 0;
 }

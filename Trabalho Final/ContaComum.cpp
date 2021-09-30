@@ -15,8 +15,8 @@ void ContaComum::operator>>(double valor){
   try{
     if(this->saldo > valor){
       this->saldo -= valor;
-      Transacao x("07/09/2021", valor, "Débito");
-      this->transacoes[this->cont] = x;
+      Transacao x("15/10/2021", valor, "Débito");
+      this->transacoes.push_back(x);
       cont++;
     }else{
       throw saldo_insuficiente_error();
@@ -29,8 +29,8 @@ void ContaComum::operator>>(double valor){
 
 void ContaComum::operator<<(double valor){
   if (valor > 0) this->saldo += valor;
-  Transacao x("07/09/2021", valor, "Crédito");
-  this->transacoes[this->cont] = x;
+  Transacao x("15/10/2021", valor, "Crédito");
+  this->transacoes.push_back(x);
   cont++;
 }
 
