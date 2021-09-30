@@ -2,12 +2,14 @@
 #define CONTA_H
 
 #include <string>
+using std::string;
+
 #include "Transacao.h"
 #include "Pessoa.h"
+#include "Banco.h"
 
 #include <iostream>
 using std::ostream;
-using std::string;
 
 #include <list>
 using std::list;
@@ -30,7 +32,7 @@ public:
   virtual double getSaldo(){ return this->saldo ;};
   virtual Pessoa getCorrentista(){ return *this->correntista ;};
  
-  // virtual void transferir(float, long int) = 0;
+  virtual void transferir(float, long int, Banco &);
 
 protected:
   Pessoa *correntista;

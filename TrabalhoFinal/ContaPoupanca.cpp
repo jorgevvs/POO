@@ -1,56 +1,56 @@
-#include "ContaLimite.h"
+#include "ContaPoupanca.h"
 
 #include "Transacao.h"
+#include "Banco.h"
 
 #include <iostream>
 using std::cout;
 using std::endl;
 using std::cerr;
 
-#include "ExcedeLimiteError.h"
+#include "Saldo_Insuficiente_Error.h"
 
-ContaLimite::ContaLimite(long int numero, Pessoa &correntista, double saldo, double limite) : Conta(numero, correntista, saldo), limite(limite) {}
+ContaPoupanca::ContaPoupanca(long int numero, Pessoa &correntista, double saldo, int aniversarioConta) : Conta(numero, correntista, saldo), aniversarioConta(aniversarioConta) {}
 
-void ContaLimite::operator<<(double valor){
+void ContaPoupanca::operator<<(double valor){
   this->saldo += valor;
-  Transacao x("15/10/2021", valor, "Crédito");
+  Transacao x("15/10/2021", valor,"Crédito" );
   this->transacoes.push_back(x);
   cont++;
 }
 
-void ContaLimite::operator>>(double valor){
+void ContaPoupanca::operator>>(double valor){
   try{
-    if(this->saldo + this->limite > valor){
+    if(this->saldo > valor){
       this->saldo -= valor;
       Transacao x("15/10/2021", valor, "Débito");
       this->transacoes.push_back(x);
       cont++;
     }else{
-      throw ExcedeLimite();
+      throw saldo_insuficiente_error();
     }
   }
-  catch(ExcedeLimite &e){
+  catch(saldo_insuficiente_error &e){
     cerr << e.what() << endl;
   }
 }
 
-
-void ContaLimite::extrato() const{
-  cout << "\n\n==== Conta Corrente com Limite ====\n";
+void ContaPoupanca::extrato() const{
+  cout << "\n\n======== Conta Poupança ========\n";
   cout << "Nome do Correntista: " << this->correntista->getNome() << endl;
   cout << "Número da conta: " << this->numero << endl;
   cout << "Saldo: $" << this->saldo << endl;
-  cout << "Limite: $" << this->limite << endl;
-  cout << "============Transações============\n";
-  
+  cout << "Aniversario da Conta: " << this->aniversarioConta << endl;
+  cout << "===========Transações===========\n";
+
   for (int i = 0; i < this->cont; i++){
     if(i == 30){
       break;
     }
-    
+
     cout << "Data da transação: " << this->transacoes[i].getData() << endl;
     cout << "Valor da transação: $" << this->transacoes[i].getValor() << endl;
     cout << "Descrição: " << this->transacoes[i].getDescricao() << endl;
-    cout << "===================================\n";
+    cout << "================================\n";
   }
 }

@@ -9,6 +9,7 @@ using std::endl;
 #include "PessoaFisica.h"
 #include "PessoaJuridica.h"
 #include "Pessoa.h"
+#include "Banco.h"
 
 #include <list>
 using std::list;

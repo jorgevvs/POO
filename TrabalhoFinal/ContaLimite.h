@@ -3,6 +3,7 @@
 
 #include "Conta.h"
 #include "Transacao.h"
+#include "Banco.h"
 
 #include <iostream>
 using std::cout;
@@ -17,7 +18,6 @@ public:
 
   virtual void operator<<(double valor);
   virtual void operator>>(double valor);
-
 
 private:
   double limite;

@@ -1,46 +1,49 @@
-#include "ContaComum.h"
+#include "ContaLimite.h"
+
 #include "Transacao.h"
+#include "Banco.h"
 
 #include <iostream>
 using std::cout;
 using std::endl;
 using std::cerr;
 
-#include "Saldo_Insuficiente_Error.h"
+#include "ExcedeLimiteError.h"
 
-ContaComum::ContaComum(long int numDaConta, Pessoa & correntista, double saldo) : Conta(numDaConta, correntista, saldo) {}
+ContaLimite::ContaLimite(long int numero, Pessoa &correntista, double saldo, double limite) : Conta(numero, correntista, saldo), limite(limite) {}
 
-
-void ContaComum::operator>>(double valor){
-  try{
-    if(this->saldo > valor){
-      this->saldo -= valor;
-      Transacao x("15/10/2021", valor, "Débito");
-      this->transacoes.push_back(x);
-      cont++;
-    }else{
-      throw saldo_insuficiente_error();
-    }
-  }
-  catch(saldo_insuficiente_error &e){
-    cerr << e.what() << endl;
-  }
-}
-
-void ContaComum::operator<<(double valor){
-  if (valor > 0) this->saldo += valor;
+void ContaLimite::operator<<(double valor){
+  this->saldo += valor;
   Transacao x("15/10/2021", valor, "Crédito");
   this->transacoes.push_back(x);
   cont++;
 }
 
-void ContaComum::extrato() const{
-  cout << "\n\n========== Conta Comum ==========\n";
+void ContaLimite::operator>>(double valor){
+  try{
+    if(this->saldo + this->limite > valor){
+      this->saldo -= valor;
+      Transacao x("15/10/2021", valor, "Débito");
+      this->transacoes.push_back(x);
+      cont++;
+    }else{
+      throw ExcedeLimite();
+    }
+  }
+  catch(ExcedeLimite &e){
+    cerr << e.what() << endl;
+  }
+}
+
+
+void ContaLimite::extrato() const{
+  cout << "\n\n==== Conta Corrente com Limite ====\n";
   cout << "Nome do Correntista: " << this->correntista->getNome() << endl;
   cout << "Número da conta: " << this->numero << endl;
   cout << "Saldo: $" << this->saldo << endl;
+  cout << "Limite: $" << this->limite << endl;
   cout << "============Transações============\n";
-
+  
   for (int i = 0; i < this->cont; i++){
     if(i == 30){
       break;
@@ -49,7 +52,6 @@ void ContaComum::extrato() const{
     cout << "Data da transação: " << this->transacoes[i].getData() << endl;
     cout << "Valor da transação: $" << this->transacoes[i].getValor() << endl;
     cout << "Descrição: " << this->transacoes[i].getDescricao() << endl;
-    cout << "=================================\n";
+    cout << "===================================\n";
   }
 }
-

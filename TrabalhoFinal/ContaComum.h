@@ -3,6 +3,7 @@
 
 #include "Conta.h"
 #include "Transacao.h"
+#include "Banco.h"
 
 #include <iostream>
 using std::cout;
@@ -18,7 +19,7 @@ public:
 
   virtual void extrato() const;
 
-  // virtual void transferir(float, long int);
+  virtual void transferir(float, long int, Banco &);
 };
 
 #endif
