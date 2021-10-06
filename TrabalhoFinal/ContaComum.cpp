@@ -53,13 +53,11 @@ void ContaComum::extrato() const{
   }
 }
 
-// void transferir(float valor, long int numeroConta, Banco &banco){
-//   Transacao x("15/10/2021", valor, "Transferência");
-
-//   for(int i = 0; i < banco.getNum(); i++){
-//     if(banco.getContas()[i].getNumero() == numeroConta){
-//       banco.getContas()[i] << valor;
-//     }
-//   }
-// }
-
+void ContaComum::transferir(float valor, Conta & conta){
+  Transacao x("15/10/2021", valor, "Transferência");
+  this->transacoes.push_back(x);
+  cont ++;
+  
+  conta << valor;
+  saldo -= valor;
+}

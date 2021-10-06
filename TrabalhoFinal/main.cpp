@@ -31,9 +31,11 @@ int main(){
 
     listaContas[0].extrato();
 
-    for(auto &el : listaContas){
-        cout << el.getSaldo() << endl;
-    }
+    c2.transferir(1000.0, c1);
+
+    c1.extrato();
+    c2.extrato();
+
 
     return 0;
 }

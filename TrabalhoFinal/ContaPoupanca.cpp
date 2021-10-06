@@ -54,3 +54,12 @@ void ContaPoupanca::extrato() const{
     cout << "================================\n";
   }
 }
+
+void ContaPoupanca::transferir(float valor, Conta & conta){
+  Transacao x("15/10/2021", valor, "Transferência");
+  this->transacoes.push_back(x);
+  cont ++;
+  
+  conta << valor;
+  saldo -= valor;
+}

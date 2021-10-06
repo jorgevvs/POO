@@ -31,7 +31,7 @@ public:
   virtual double getSaldo(){ return this->saldo ;};
   virtual Pessoa getCorrentista(){ return *this->correntista ;};
  
-  // virtual void transferir(float, long int, Banco &);
+  virtual void transferir(float, Conta &) { };
 
 protected:
   Pessoa *correntista;

@@ -18,6 +18,8 @@ public:
   virtual void operator<<(double valor);
   virtual void operator>>(double valor);
 
+  virtual void transferir(float, Conta &);
+
 private:
   double limite;
 };

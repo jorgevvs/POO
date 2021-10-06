@@ -48,10 +48,18 @@ void ContaLimite::extrato() const{
     if(i == 30){
       break;
     }
-    
     cout << "Data da transação: " << this->transacoes[i].getData() << endl;
     cout << "Valor da transação: $" << this->transacoes[i].getValor() << endl;
     cout << "Descrição: " << this->transacoes[i].getDescricao() << endl;
     cout << "===================================\n";
   }
+}
+
+void ContaLimite::transferir(float valor, Conta & conta){
+  Transacao x("15/10/2021", valor, "Transferência");
+  this->transacoes.push_back(x);
+  cont ++;
+  
+  conta << valor;
+  saldo -= valor;
 }
