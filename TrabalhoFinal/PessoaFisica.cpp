@@ -12,7 +12,3 @@ PessoaFisica::PessoaFisica(string name, long int num) : Pessoa(name){
     this -> nome = name;
     this ->cpfOrCNPJ = num;
 }
-
-void PessoaFisica::setCPF(long int num){
-    this ->cpfOrCNPJ = num;
-}

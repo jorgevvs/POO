@@ -14,6 +14,10 @@ public:
     virtual long int getCpfOrCNPJ() { return this->cpfOrCNPJ;};
     virtual string getRazao() { return this->razao;};
 
+    virtual void setCpfOrCNPJ(long int x) { this-> cpfOrCNPJ = x; };
+    virtual void setNome(string x) { this->nome = x; };
+    virtual void setRazao(string x) { this->razao = x;};
+
 protected:
     string nome;
     long int cpfOrCNPJ = 0;

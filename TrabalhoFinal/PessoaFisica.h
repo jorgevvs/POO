@@ -10,8 +10,6 @@ class PessoaFisica : public Pessoa{
 public:
     PessoaFisica();
     PessoaFisica(string,long int);
-
-    void setCPF(long int);
 };
 
 #endif

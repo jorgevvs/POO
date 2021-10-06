@@ -27,19 +27,26 @@ Banco::Banco(string nome, long int CNPJ, string razao) : PessoaJuridica(nome, CN
 }
 
 void Banco::cadastrarConta(Conta & conta){
-    int existe = 0;
-    for(int i = 0; i < numContas; i++){
-        if(contas[i].getCorrentista().getNome() == conta.getCorrentista().getNome()) existe = 1;
+    int correntistaExiste = 0;
+    for(int i = 0; i < numCorrentistas; i++){
+        if(correntistas[i].getNome() == conta.getCorrentista().getNome()) correntistaExiste = 1;
     }
 
-    if(existe == 0){
+    if(correntistaExiste == 0){
         this->correntistas.push_back(conta.getCorrentista());
         this->numCorrentistas ++;
     }
+    int contaExiste = 0;
 
+    for(int i = 0; i < numContas; i++){
+        if(conta.getNumero() == contas[i].getNumero()) contaExiste = 1;
+    }
 
-    this->contas.push_back(conta);
-    this->numContas ++;
+    if(contaExiste == 0){
+        this->contas.push_back(conta);
+        this->numContas ++;
+    }
+    
 }
 
 void Banco::removerConta(long int num){
@@ -121,7 +128,7 @@ bool Banco::salvar_dados(){
     return false;
   
   for (int i = 0 ; i < numContas ; i++){
-    fout << contas[i].getCorrentista().getNome() << ' ' << contas[i].getNumero() << ' ' << contas[i].getSaldo() << " "<< contas[i].getAniver() << " " << contas[i].getLimite() <<endl;
+    fout <<  contas[i].getNumero() <<' ' << contas[i].getCorrentista().getNome() << ' ' << contas[i].getSaldo() << " "<< contas[i].getAniver() << " " << contas[i].getLimite() <<endl;
   }
 
   fout.close(); 
@@ -180,7 +187,7 @@ bool Banco::ler_dados(){
         }
     }
       
-    ler_contas();
+    this->ler_contas();
 
   fin.close(); 
 
@@ -196,26 +203,53 @@ bool Banco::ler_contas(){
 
     Conta_entrada c;
 
-    while (fin >> c.nome >> c.num >> c.saldo >> c.aniver >> c.limite){   
-        Pessoa x;
+    while (fin >> c.num >> c.nome >> c.saldo >> c.aniver >> c.limite){  
+        PessoaFisica novaFisica;
+        PessoaJuridica novaJuridica;
+
         for(int i = 0; i < this->numCorrentistas; i++){
             if(c.nome == correntistas[i].getNome()){
-                x = correntistas[i];
+                Pessoa x = correntistas[i];
+                if(x.getRazao() != "x"){
+                    novaJuridica.setCpfOrCNPJ(x.getCpfOrCNPJ());
+                    novaJuridica.setRazao(x.getRazao());
+                    novaJuridica.setNome(x.getNome());
+                }else{
+                    novaFisica.setCpfOrCNPJ(x.getCpfOrCNPJ());
+                    novaFisica.setRazao(x.getRazao());
+                    novaFisica.setNome(x.getNome());
+                }
             }
         }
-        if (c.aniver != 0){
-            ContaPoupanca novaConta(c.num, x, c.saldo, c.aniver);
-        }else if(c.limite != 0){
-            ContaLimite novaConta(c.num, x, c.saldo, c.limite);
+
+        if(novaFisica.getCpfOrCNPJ()){
+            if (c.aniver != 0){
+            ContaPoupanca novaConta(c.num, novaFisica, c.saldo, c.aniver);
+            this->cadastrarConta(novaConta);
+            }else if(c.limite != 0){
+                ContaLimite novaConta(c.num, novaFisica, c.saldo, c.limite);
+                this->cadastrarConta(novaConta);
+            }else{
+                ContaComum novaConta(c.num, novaFisica, c.saldo);
+                this->cadastrarConta(novaConta);
+            }
         }else{
-            ContaComum novaConta(c.num, x, c.saldo);
+            if (c.aniver != 0){
+            ContaPoupanca novaConta(c.num, novaJuridica, c.saldo, c.aniver);
+            this->cadastrarConta(novaConta);
+            }else if(c.limite != 0){
+                ContaLimite novaConta(c.num, novaJuridica, c.saldo, c.limite);
+                this->cadastrarConta(novaConta);
+            }else{
+                ContaComum novaConta(c.num, novaJuridica, c.saldo);
+                this->cadastrarConta(novaConta);
+            }
         }
-        
     }
 
     fin.close(); 
+    return true;
 
-  return true;
 }
 
 

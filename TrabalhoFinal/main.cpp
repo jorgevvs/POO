@@ -31,7 +31,10 @@ int main(){
     b1.cadastrarConta(c2);
     b1.cadastrarConta(c3);
 
-    b1.listarContasCorrentista(p2);
+    b1.listarContas();
+
+
+    // Banco b1("BB", 5123125, "Banco do Brasil");
 
     return 0;
 }
