@@ -27,6 +27,8 @@ public:
     void listarContasCorrentista(Pessoa& );
     void listarContas();
 
+    Pessoa& achaCorrentista(string);
+
     int getNum() { return this->numContas;};
 
     bool salvar_dados();

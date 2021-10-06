@@ -194,59 +194,39 @@ bool Banco::ler_dados(){
   return true;
 }
 
+Pessoa& Banco::achaCorrentista(string nome){
+    for(int i = 0; i < numCorrentistas; i ++){
+        if(correntistas[i].getNome() == nome){
+            return correntistas[i];
+        }
+    }
+
+    return this->correntistas[0];
+}
+
 bool Banco::ler_contas(){
     ifstream fin("contas.dat", std::ios::in);
 
     if (!fin){  
         return false;
     } 
-
     Conta_entrada c;
 
     while (fin >> c.num >> c.nome >> c.saldo >> c.aniver >> c.limite){  
-        PessoaFisica novaFisica;
-        PessoaJuridica novaJuridica;
-
-        for(int i = 0; i < this->numCorrentistas; i++){
-            if(c.nome == correntistas[i].getNome()){
-                Pessoa x = correntistas[i];
-                if(x.getRazao() != "x"){
-                    novaJuridica.setCpfOrCNPJ(x.getCpfOrCNPJ());
-                    novaJuridica.setRazao(x.getRazao());
-                    novaJuridica.setNome(x.getNome());
-                }else{
-                    novaFisica.setCpfOrCNPJ(x.getCpfOrCNPJ());
-                    novaFisica.setRazao(x.getRazao());
-                    novaFisica.setNome(x.getNome());
-                }
-            }
-        }
-
-        if(novaFisica.getCpfOrCNPJ()){
-            if (c.aniver != 0){
-            ContaPoupanca novaConta(c.num, novaFisica, c.saldo, c.aniver);
+        
+        if (c.aniver != 0){
+            ContaPoupanca novaConta(c.num, this->achaCorrentista(c.nome), c.saldo, c.aniver);
             this->cadastrarConta(novaConta);
-            }else if(c.limite != 0){
-                ContaLimite novaConta(c.num, novaFisica, c.saldo, c.limite);
-                this->cadastrarConta(novaConta);
-            }else{
-                ContaComum novaConta(c.num, novaFisica, c.saldo);
-                this->cadastrarConta(novaConta);
-            }
+
+        }else if(c.limite != 0){
+            ContaLimite novaConta(c.num, this->achaCorrentista(c.nome), c.saldo, c.limite);
+            this->cadastrarConta(novaConta);
+
         }else{
-            if (c.aniver != 0){
-            ContaPoupanca novaConta(c.num, novaJuridica, c.saldo, c.aniver);
+            ContaComum novaConta(c.num, this->achaCorrentista(c.nome), c.saldo);
             this->cadastrarConta(novaConta);
-            }else if(c.limite != 0){
-                ContaLimite novaConta(c.num, novaJuridica, c.saldo, c.limite);
-                this->cadastrarConta(novaConta);
-            }else{
-                ContaComum novaConta(c.num, novaJuridica, c.saldo);
-                this->cadastrarConta(novaConta);
-            }
         }
     }
-
     fin.close(); 
     return true;
 

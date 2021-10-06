@@ -18,23 +18,25 @@ using std::list;
 using std::vector;
 
 int main(){
-    PessoaFisica p1("ThalesLuiz", 22642763812);
-    PessoaJuridica p2("Robertinho" , 5283755323, "LGTB");
+    // PessoaFisica p1("ThalesLuiz", 22642763812);
+    // PessoaJuridica p2("Robertinho" , 5283755323, "LGTB");
 
-    ContaComum c1(420131, p1, 5050.50);
-    ContaLimite c2(52526, p2, 1000.50, 500.00);
-    ContaPoupanca c3(52526532, p2, 2000.50, 30);
+    // ContaComum c1(420131, p1, 5050.50);
+    // ContaLimite c2(52526, p2, 1000.50, 500.00);
+    // ContaPoupanca c3(52526532, p2, 2000.50, 30);
+
+    // Banco b1("BB", 5123125, "Banco do Brasil");
+
+    // b1.cadastrarConta(c1);
+    // b1.cadastrarConta(c2);
+    // b1.cadastrarConta(c3);
+
+    // b1.listarContas();
+
 
     Banco b1("BB", 5123125, "Banco do Brasil");
 
-    b1.cadastrarConta(c1);
-    b1.cadastrarConta(c2);
-    b1.cadastrarConta(c3);
-
     b1.listarContas();
-
-
-    // Banco b1("BB", 5123125, "Banco do Brasil");
 
     return 0;
 }
