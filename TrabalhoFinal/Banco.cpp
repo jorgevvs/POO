@@ -67,16 +67,16 @@ void Banco::atualizarConta(long int num, Pessoa &novoDono, string tipoConta, dou
     }
 }
 
-void Banco::listarContas(){
-    for(int i = 0; i < this->numContas; i++){
-        contas[i].extrato();
-    }
+vector<Conta> Banco::listarContas(){
+    return this->contas;
 }
 
-void Banco::listarContasCorrentista(Pessoa &pessoa){
+vector<Conta> Banco::listarContasCorrentista(Pessoa &pessoa){
+    vector<Conta> aux;
     for(int i = 0; i < this->numContas;i++){
         if(contas[i].getCorrentista().getNome() == pessoa.getNome()){
-            contas[i].extrato();
+            aux.push_back(contas[i]);
         }
     }
+    return aux;
 }

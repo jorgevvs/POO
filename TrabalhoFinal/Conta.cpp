@@ -1,5 +1,4 @@
 #include "Conta.h"
-#include "Banco.h"
 
 #include <iostream>
 using std::cout;

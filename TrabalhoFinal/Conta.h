@@ -6,7 +6,6 @@ using std::string;
 
 #include "Transacao.h"
 #include "Pessoa.h"
-#include "Banco.h"
 
 #include <iostream>
 using std::ostream;
@@ -32,7 +31,7 @@ public:
   virtual double getSaldo(){ return this->saldo ;};
   virtual Pessoa getCorrentista(){ return *this->correntista ;};
  
-  virtual void transferir(float, long int, Banco &);
+  // virtual void transferir(float, long int, Banco &);
 
 protected:
   Pessoa *correntista;

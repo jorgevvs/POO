@@ -1,13 +1,11 @@
 #include "ContaComum.h"
 #include "Transacao.h"
-#include "Banco.h"
 
 #include <iostream>
 using std::cout;
 using std::endl;
 using std::cerr;
 
-#include "Banco.h"
 #include "Saldo_Insuficiente_Error.h"
 
 ContaComum::ContaComum(long int numDaConta, Pessoa & correntista, double saldo) : Conta(numDaConta, correntista, saldo) {}

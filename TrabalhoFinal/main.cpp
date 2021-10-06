@@ -23,32 +23,17 @@ int main(){
 
     ContaComum c1(420131, p1, 5050.50);
     ContaLimite c2(52526, p2, 1000.50, 500.00);
-    
-    list<Pessoa> lista;
 
-    lista.push_back(p1);
-    lista.push_back(p2);
+    vector<Conta> listaContas;
 
-    for(auto &el : lista){
-        cout << el.getNome() << endl;
+    listaContas.push_back(c1);
+    listaContas.push_back(c2);
+
+    listaContas[0].extrato();
+
+    for(auto &el : listaContas){
+        cout << el.getSaldo() << endl;
     }
-    int x= 0;
-
-    list<Conta> listaConta;
-
-    listaConta.push_back(c1);
-    listaConta.push_back(c2);
-
-    
-    for(auto &el : listaConta){
-        if(el.getNumero() == 420131)
-            x +=1;
-    }
-    cout << x << endl;
-
-
-    c1 << 1000;
-    c1.extrato();
 
     return 0;
 }

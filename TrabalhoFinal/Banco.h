@@ -24,10 +24,11 @@ public:
     void consultarConta(long int);
     void atualizarConta(long int, Pessoa &, string, double, int);
     
-    void listarContasCorrentista(Pessoa& );
-    void listarContas();
+    vector<Conta> listarContasCorrentista(Pessoa& );
+    vector<Conta> listarContas();
 
     int getNum() { return this->numContas;};
+
 
 private:
     list<Pessoa> correntistas;

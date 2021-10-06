@@ -3,7 +3,6 @@
 
 #include "Conta.h"
 #include "Transacao.h"
-#include "Banco.h"
 
 #include <iostream>
 using std::cout;
