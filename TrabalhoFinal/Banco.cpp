@@ -13,23 +13,9 @@ Banco::Banco(string nome, long int CNPJ, string razao) : PessoaJuridica(nome, CN
     this->razao = razao;
 }
 
-void Banco::cadastrarConta(Pessoa &novaPessoa, string tipoConta, long int numero, double valorInicial, int x = 0){
-    this->correntistas.push_back(novaPessoa);
-    if(tipoConta == "comum"){
-        ContaComum novaConta(numero,novaPessoa,valorInicial);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
-
-    }else if(tipoConta == "poupanca"){
-        ContaPoupanca novaConta(numero,novaPessoa,valorInicial, x);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
-
-    }else if(tipoConta == "limite"){
-        ContaLimite novaConta(numero, novaPessoa, valorInicial, 500.00);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
-    }
+void Banco::cadastrarConta(Conta & conta){
+    this->contas.push_back(conta);
+    this->numContas ++;
 }
 
 void Banco::removerConta(long int num){
@@ -67,16 +53,24 @@ void Banco::atualizarConta(long int num, Pessoa &novoDono, string tipoConta, dou
     }
 }
 
-vector<Conta> Banco::listarContas(){
-    return this->contas;
+void Banco::listarContas(){
+    for(int i = 0; i < this-> numContas; i++){
+        cout << "\n============ Conta ============\n";
+        cout << "Nome do Correntista: " << contas[i].getCorrentista().getNome() << endl;
+        cout << "Número da conta: " << contas[i].getNumero() << endl;
+        cout << "Saldo: $" << contas[i].getSaldo() << endl;
+        cout << "===============================" << endl;
+    }
 }
 
-vector<Conta> Banco::listarContasCorrentista(Pessoa &pessoa){
-    vector<Conta> aux;
-    for(int i = 0; i < this->numContas;i++){
+void Banco::listarContasCorrentista(Pessoa &pessoa){
+    for(int i = 0; i < this-> numContas; i++){
         if(contas[i].getCorrentista().getNome() == pessoa.getNome()){
-            aux.push_back(contas[i]);
+        cout << "\n============ Conta ============\n";
+        cout << "Nome do Correntista: " << contas[i].getCorrentista().getNome() << endl;
+        cout << "Número da conta: " << contas[i].getNumero() << endl;
+        cout << "Saldo: $" << contas[i].getSaldo() << endl;
+        cout << "===============================" << endl;
         }
     }
-    return aux;
 }

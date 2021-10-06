@@ -23,18 +23,15 @@ int main(){
 
     ContaComum c1(420131, p1, 5050.50);
     ContaLimite c2(52526, p2, 1000.50, 500.00);
+    ContaPoupanca c3(52526532, p2, 2000.50, 30);
 
-    vector<Conta> listaContas;
+    Banco b1("BB", 5123125, "Banco do Brasil");
 
-    listaContas.push_back(c1);
-    listaContas.push_back(c2);
+    b1.cadastrarConta(c1);
+    b1.cadastrarConta(c2);
+    b1.cadastrarConta(c3);
 
-    listaContas[0].extrato();
-
-    c2.transferir(1000.0, c1);
-
-    c1.extrato();
-    c2.extrato();
+    b1.listarContasCorrentista(p2);
 
 
     return 0;

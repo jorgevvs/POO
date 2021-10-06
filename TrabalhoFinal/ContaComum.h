@@ -19,6 +19,7 @@ public:
   virtual void extrato() const;
 
   virtual void transferir(float, Conta &);
+
 };
 
 #endif

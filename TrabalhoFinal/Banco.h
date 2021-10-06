@@ -19,13 +19,13 @@ public:
     Banco(string, long int, string);
 
 
-    void cadastrarConta(Pessoa &, string,long int, double, int);
+    void cadastrarConta(Conta& conta);
     void removerConta(long int);
     void consultarConta(long int);
     void atualizarConta(long int, Pessoa &, string, double, int);
     
-    vector<Conta> listarContasCorrentista(Pessoa& );
-    vector<Conta> listarContas();
+    void listarContasCorrentista(Pessoa& );
+    void listarContas();
 
     int getNum() { return this->numContas;};
 
