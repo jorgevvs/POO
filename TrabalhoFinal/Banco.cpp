@@ -194,6 +194,11 @@ bool Banco::ler_dados(){
   return true;
 }
 
+void Banco::cadastrarCorrentista(Pessoa& correntista){
+    this->correntistas.push_back(correntista);
+    this->numCorrentistas++;
+}
+
 Pessoa& Banco::achaCorrentista(string nome){
     for(int i = 0; i < numCorrentistas; i ++){
         if(correntistas[i].getNome() == nome){
@@ -202,6 +207,15 @@ Pessoa& Banco::achaCorrentista(string nome){
     }
 
     return this->correntistas[0];
+}
+
+Conta& Banco::achaConta(long int num){
+    for(int i = 0; i < numContas; i ++){
+        if(contas[i].getNumero() == num){
+            return contas[i];
+        }
+    }
+    return this->contas[0];
 }
 
 bool Banco::ler_contas(){

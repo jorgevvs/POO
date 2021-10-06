@@ -23,11 +23,14 @@ public:
     void removerConta(long int);
     void consultarConta(long int);
     void atualizarConta(long int, Pessoa &, string, double, int);
+
+    void cadastrarCorrentista(Pessoa &);
     
     void listarContasCorrentista(Pessoa& );
     void listarContas();
 
     Pessoa& achaCorrentista(string);
+    Conta& achaConta(long int);
 
     int getNum() { return this->numContas;};
 
