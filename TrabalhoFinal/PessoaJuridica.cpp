@@ -4,20 +4,20 @@
 using std::string;
 
 PessoaJuridica::PessoaJuridica(){
-    this -> cnpj = 0;
+    this -> cpfOrCNPJ = 0;
     this->razao = "";
     this-> nome = "";
 }
 
-PessoaJuridica::PessoaJuridica(string name, long int num, string raz) : Pessoa(name), cnpj(num), razao(raz){
+PessoaJuridica::PessoaJuridica(string name, long int num, string raz) : Pessoa(name){
     this -> nome = name;
-    this -> cnpj = num;
+    this -> cpfOrCNPJ = num;
     this -> razao = raz;
 }
 
 
 void PessoaJuridica::setCNPJ(long int num){
-    this -> cnpj = num;
+    this ->cpfOrCNPJ = num;
 }
 
 void PessoaJuridica::setRazao(string nome){

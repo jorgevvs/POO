@@ -10,7 +10,9 @@ using std::cerr;
 
 #include "ExcedeLimiteError.h"
 
-ContaLimite::ContaLimite(long int numero, Pessoa &correntista, double saldo, double limite) : Conta(numero, correntista, saldo), limite(limite) {}
+ContaLimite::ContaLimite(long int numero, Pessoa &correntista, double saldo, double limite) : Conta(numero, correntista, saldo){
+  this->limite = limite;
+}
 
 void ContaLimite::operator<<(double valor){
   this->saldo += valor;

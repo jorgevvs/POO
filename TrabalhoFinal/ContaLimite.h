@@ -20,8 +20,6 @@ public:
 
   virtual void transferir(float, Conta &);
 
-private:
-  double limite;
 };
 
 #endif

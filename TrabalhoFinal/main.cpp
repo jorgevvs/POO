@@ -18,7 +18,7 @@ using std::list;
 using std::vector;
 
 int main(){
-    PessoaFisica p1("Thales Luiz", 22642763812);
+    PessoaFisica p1("ThalesLuiz", 22642763812);
     PessoaJuridica p2("Robertinho" , 5283755323, "LGTB");
 
     ContaComum c1(420131, p1, 5050.50);
@@ -32,7 +32,6 @@ int main(){
     b1.cadastrarConta(c3);
 
     b1.listarContasCorrentista(p2);
-
 
     return 0;
 }

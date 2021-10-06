@@ -5,18 +5,14 @@ using std::string;
 
 PessoaFisica::PessoaFisica(){
     this->nome = "";
-    this ->cpf = 0;
+    this ->cpfOrCNPJ = 0;
 }
 
-PessoaFisica::PessoaFisica(string name, long int num) : Pessoa(name),cpf(num){
+PessoaFisica::PessoaFisica(string name, long int num) : Pessoa(name){
     this -> nome = name;
-    this ->cpf = num;
-}
-
-long int PessoaFisica::getCPF() const{
-    return this ->cpf;
+    this ->cpfOrCNPJ = num;
 }
 
 void PessoaFisica::setCPF(long int num){
-    this ->cpf = num;
+    this ->cpfOrCNPJ = num;
 }

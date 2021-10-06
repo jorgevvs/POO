@@ -33,12 +33,17 @@ public:
  
   virtual void transferir(float, Conta &) { };
 
+  virtual double getLimite() { return this->limite; };
+  virtual int getAniver() { return this->aniversarioConta; };
+
 protected:
   Pessoa *correntista;
   double saldo;
   long int numero;
   vector<Transacao> transacoes;
   int cont = 0;
+  double limite = 0.0;
+  int aniversarioConta = 0;
 };
 
 #endif

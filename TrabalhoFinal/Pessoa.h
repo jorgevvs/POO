@@ -11,8 +11,13 @@ public:
 
     virtual string getNome() const { return this-> nome; };
 
+    virtual long int getCpfOrCNPJ() { return this->cpfOrCNPJ;};
+    virtual string getRazao() { return this->razao;};
+
 protected:
     string nome;
+    long int cpfOrCNPJ = 0;
+    string razao = "x";
 
 };
 

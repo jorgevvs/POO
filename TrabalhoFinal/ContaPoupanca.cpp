@@ -10,7 +10,9 @@ using std::cerr;
 
 #include "Saldo_Insuficiente_Error.h"
 
-ContaPoupanca::ContaPoupanca(long int numero, Pessoa &correntista, double saldo, int aniversarioConta) : Conta(numero, correntista, saldo), aniversarioConta(aniversarioConta) {}
+ContaPoupanca::ContaPoupanca(long int numero, Pessoa &correntista, double saldo, int aniversarioConta) : Conta(numero, correntista, saldo){
+  this->aniversarioConta = aniversarioConta;
+}
 
 void ContaPoupanca::operator<<(double valor){
   this->saldo += valor;

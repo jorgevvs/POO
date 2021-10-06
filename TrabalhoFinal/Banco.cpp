@@ -2,6 +2,17 @@
 #include "ContaComum.h"
 #include "ContaLimite.h"
 #include "ContaPoupanca.h"
+#include "PessoaFisica.h"
+#include "PessoaJuridica.h"
+
+
+#include <iomanip>
+using std::setw;
+
+#include <fstream>
+using std::ifstream;
+using std::ofstream;
+using std::ios;
 
 #include <iostream>
 using std::cout;
@@ -9,19 +20,47 @@ using std::endl;
 
 Banco::Banco(string nome, long int CNPJ, string razao) : PessoaJuridica(nome, CNPJ, razao){
     this->nome = nome;
-    this->cnpj = CNPJ;
+    this->cpfOrCNPJ = CNPJ;
     this->razao = razao;
+
+    this->ler_dados();
 }
 
 void Banco::cadastrarConta(Conta & conta){
+    int existe = 0;
+    for(int i = 0; i < numContas; i++){
+        if(contas[i].getCorrentista().getNome() == conta.getCorrentista().getNome()) existe = 1;
+    }
+
+    if(existe == 0){
+        this->correntistas.push_back(conta.getCorrentista());
+        this->numCorrentistas ++;
+    }
+
+
     this->contas.push_back(conta);
     this->numContas ++;
 }
 
 void Banco::removerConta(long int num){
+    int aux = 0;
     for(int i = 0; i < numContas; i++){
         if(this->contas[i].getNumero() == num){
             this->contas.erase(contas.begin() + i);
+
+            for(int j = 0; j < numContas; j++){
+                if(contas[i].getCorrentista().getNome() == contas[j].getCorrentista().getNome()){
+                    aux ++;
+                }
+            }
+            if(aux == 1){
+                for(int j = 0; j < numCorrentistas; j ++){
+                    if(this->correntistas[j].getNome() == contas[i].getCorrentista().getNome()){
+                        this->correntistas.erase(correntistas.begin() + j);
+                        numCorrentistas --;
+                    }
+                }
+            }
         }
     }
 }
@@ -73,4 +112,113 @@ void Banco::listarContasCorrentista(Pessoa &pessoa){
         cout << "===============================" << endl;
         }
     }
+}
+
+bool Banco::salvar_dados(){
+  ofstream fout("contas.dat", std::ios::out);
+
+  if (!fout)
+    return false;
+  
+  for (int i = 0 ; i < numContas ; i++){
+    fout << contas[i].getCorrentista().getNome() << ' ' << contas[i].getNumero() << ' ' << contas[i].getSaldo() << " "<< contas[i].getAniver() << " " << contas[i].getLimite() <<endl;
+  }
+
+  fout.close(); 
+
+  salva_pessoas();
+
+  return true;
+}
+
+bool Banco::salva_pessoas(){
+    ofstream fout("correntistas.dat", std::ios::out);
+
+  if (!fout)
+    return false;
+  
+  for (int i = 0 ; i <  numCorrentistas; i++){
+    fout << correntistas[i].getNome() << ' ' << correntistas[i].getCpfOrCNPJ() << ' ' << correntistas[i].getRazao() << endl;
+  }
+
+    fout.close(); 
+
+    return true;
+}
+
+
+struct Conta_entrada{
+    string nome;
+    long int num;
+    double saldo;
+    int aniver;
+    double limite;
+};
+
+struct correntistas_entrada{
+    string nome;
+    long int cpfOrCNPJ;
+    string razao;
+};
+
+bool Banco::ler_dados(){
+  ifstream fin("correntistas.dat", std::ios::in);
+
+  if (!fin) return false;
+
+    correntistas_entrada c;
+
+    while (fin >> c.nome >> c.cpfOrCNPJ >> c.razao){   
+        if(c.razao != "x"){
+            PessoaJuridica novaPessoa(c.nome, c.cpfOrCNPJ, c.razao);
+            this->correntistas.push_back(novaPessoa);
+            this->numCorrentistas ++;
+        }else{
+            PessoaFisica novaPessoa(c.nome, c.cpfOrCNPJ);
+            this->correntistas.push_back(novaPessoa);
+            this->numCorrentistas ++;
+        }
+    }
+      
+    ler_contas();
+
+  fin.close(); 
+
+  return true;
+}
+
+bool Banco::ler_contas(){
+    ifstream fin("contas.dat", std::ios::in);
+
+    if (!fin){  
+        return false;
+    } 
+
+    Conta_entrada c;
+
+    while (fin >> c.nome >> c.num >> c.saldo >> c.aniver >> c.limite){   
+        Pessoa x;
+        for(int i = 0; i < this->numCorrentistas; i++){
+            if(c.nome == correntistas[i].getNome()){
+                x = correntistas[i];
+            }
+        }
+        if (c.aniver != 0){
+            ContaPoupanca novaConta(c.num, x, c.saldo, c.aniver);
+        }else if(c.limite != 0){
+            ContaLimite novaConta(c.num, x, c.saldo, c.limite);
+        }else{
+            ContaComum novaConta(c.num, x, c.saldo);
+        }
+        
+    }
+
+    fin.close(); 
+
+  return true;
+}
+
+
+Banco::~Banco(){
+    salvar_dados();
 }

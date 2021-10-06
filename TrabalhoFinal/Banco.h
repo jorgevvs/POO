@@ -17,7 +17,7 @@ using std::vector;
 class Banco: public PessoaJuridica{
 public:
     Banco(string, long int, string);
-
+    ~Banco();
 
     void cadastrarConta(Conta& conta);
     void removerConta(long int);
@@ -29,11 +29,16 @@ public:
 
     int getNum() { return this->numContas;};
 
+    bool salvar_dados();
+    bool salva_pessoas();
+    bool ler_dados();
+    bool ler_contas();
 
 private:
-    list<Pessoa> correntistas;
+    vector<Pessoa> correntistas;
     vector<Conta> contas;
     int numContas = 0;
+    int numCorrentistas = 0;
 
 };
 #endif

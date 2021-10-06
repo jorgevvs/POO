@@ -12,14 +12,8 @@ public:
     PessoaJuridica(string,long int,string);
 
     void setCNPJ(long int);
-    virtual long int getCNPJ() const { return this-> cnpj; };
-
     void setRazao(string);
-    virtual string getRazao() const { return this-> razao; };
 
-protected:
-    long int cnpj;
-    string razao;
 };
 
 #endif

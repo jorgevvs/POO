@@ -20,6 +20,9 @@ public:
 
   virtual void transferir(float, Conta &);
 
+  virtual double getLimite() { return 0; };
+  virtual int getAniver() { return 0; };
+
 };
 
 #endif

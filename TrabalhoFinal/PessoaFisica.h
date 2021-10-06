@@ -12,10 +12,6 @@ public:
     PessoaFisica(string,long int);
 
     void setCPF(long int);
-    long int getCPF() const;
-
-protected:
-    long int cpf;
 };
 
 #endif
