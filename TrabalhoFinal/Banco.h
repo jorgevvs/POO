@@ -22,7 +22,7 @@ public:
     void cadastrarConta(Conta& conta);
     void removerConta(long int);
     void consultarConta(long int);
-    void atualizarConta(long int, Pessoa &, string, double, int);
+    void atualizarConta(Conta&, int);
 
     void cadastrarCorrentista(Pessoa &);
     

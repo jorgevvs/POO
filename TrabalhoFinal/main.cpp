@@ -103,13 +103,34 @@ void gerenciarBanco(Banco &banco){
             banco.cadastrarConta(novaConta);
         }
 
+    }else if(opcao == 2){
+        long int num;
+        cout << "Digite o número da conta: ";
+        cin >> num;
+
+        banco.consultarConta(num);
+    }else if(opcao == 3){
+        long int num;
+        cout << "Digite o número da conta: ";
+        cin >> num;
+
+        int tipoConta;
+        cout << "Digite o novo tipo de conta que deseja: Comum ( 1 ), Limite ( 2 ) ou Poupanca ( 3 ): ";
+        cin >> tipoConta;
+
+        banco.atualizarConta(banco.achaConta(num), tipoConta);
+
+    }else if(opcao == 4){
+        long int num;
+        cout << "Digite o número da conta: ";
+        cin >> num;
+
+        banco.removerConta(num);
+
     }else{
         break;
     }
-
-
     }
-    return;
 }
 
 void gerenciarConta(Banco & banco, long int conta){

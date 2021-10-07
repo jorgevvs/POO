@@ -4,6 +4,7 @@
 #include "ContaPoupanca.h"
 #include "PessoaFisica.h"
 #include "PessoaJuridica.h"
+#include "Conta.h"
 
 
 #include <iomanip>
@@ -16,6 +17,7 @@ using std::ios;
 
 #include <iostream>
 using std::cout;
+using std::cin;
 using std::endl;
 
 Banco::Banco(string nome, long int CNPJ, string razao) : PessoaJuridica(nome, CNPJ, razao){
@@ -70,32 +72,63 @@ void Banco::removerConta(long int num){
             }
         }
     }
+    numContas --;
 }
 
 void Banco::consultarConta(long int num){
     for(int i = 0; i < numContas; i++){
         if(this->contas[i].getNumero() == num){
-            this->contas[i].extrato();
+            cout << "\n\n\n\n========== Consulta ==========\n";
+            cout << "Nome do Correntista: " << contas[i].getCorrentista().getNome() << endl;
+            cout << "Número da conta: " << contas[i].getNumero() << endl;
+            cout << "Saldo: $" << contas[i].getSaldo() << endl;
+            cout << "==============================\n\n\n" << endl;
         }
     }
 }
 
-void Banco::atualizarConta(long int num, Pessoa &novoDono, string tipoConta, double novoValor, int x = 0 ){
-    this->removerConta(num);
-    if(tipoConta == "comum"){
-        ContaComum novaConta(num,novoDono,novoValor);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
+void Banco::atualizarConta(Conta& conta, int tipoConta){
+    if(tipoConta == 2){
+        double limite;
+        cout << "Digite um limite inicial: ";
+        cin >> limite;
 
-    }else if(tipoConta == "poupanca"){
-        ContaPoupanca novaConta(num,novoDono,novoValor, x);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
+        if(conta.getCorrentista().getRazao() != "x"){
+            ContaLimite novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo(), limite);
 
-    }else if(tipoConta == "limite"){
-        ContaLimite novaConta(num, novoDono, novoValor, 500.00);
-        this->contas.push_back(novaConta);
-        this->numContas ++;
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }else{
+            ContaLimite novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo(), limite);
+
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }
+
+    }else if(tipoConta == 3){
+        int aniver;
+        cout << "Digite uma data para o Aniversário da conta: ";
+        cin >> aniver;
+        
+        if(conta.getCorrentista().getRazao() != "x"){
+            ContaPoupanca novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo(), aniver);
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }else{
+            ContaPoupanca novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo(), aniver);
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }
+    }else{
+        if(conta.getCorrentista().getRazao() != "x"){
+            ContaComum novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo());
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }else{
+            ContaComum novaConta(conta.getNumero(), this->achaCorrentista(conta.getCorrentista().getNome()), conta.getSaldo());
+            this->removerConta(conta.getNumero());
+            this->cadastrarConta(novaConta);
+        }
     }
 }
 
