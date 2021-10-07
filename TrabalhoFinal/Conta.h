@@ -22,16 +22,16 @@ public:
   Conta();
   Conta(long int ,Pessoa& ,double);
 
-  virtual void operator<<(double) {};
-  virtual void operator>>(double){};
+  virtual void operator<<(double);
+  virtual void operator>>(double);
 
-  virtual void extrato() {};
+  virtual void extrato() const;
 
   virtual long int getNumero(){ return this->numero ;};
   virtual double getSaldo(){ return this->saldo ;};
   virtual Pessoa getCorrentista(){ return *this->correntista ;};
  
-  virtual void transferir(float, Conta &) { };
+  virtual void transferir(float, Conta &);
 
   virtual double getLimite() { return this->limite; };
   virtual int getAniver() { return this->aniversarioConta; };

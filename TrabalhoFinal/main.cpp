@@ -55,9 +55,10 @@ void cadastrarCliente(Banco &banco, string nome){
 void gerenciarBanco(Banco &banco){
     while(true){
     int opcao = 0;
-    cout << "======== Conta Gerente ========\n";
+    cout << "============= Conta Gerente =============\n";
     cout << "Abrir conta( 1 ), Consultar Conta ( 2 )\n";
     cout << "Atualizar Conta ( 3 ), Fechar Conta ( 4 )\n";
+    cout << "============== Sair ( -1 ) ==============\n";
     cout << "Digite uma operação: ";
     cin >> opcao;
     cout << "===============================\n";
@@ -133,8 +134,52 @@ void gerenciarBanco(Banco &banco){
     }
 }
 
-void gerenciarConta(Banco & banco, long int conta){
+void gerenciarConta(Banco & banco, Conta & conta){
+    while(true){
+        int opcao = 0;
+        cout << "\n\n\n=========== Conta Correntista ===========\n";
+        cout << "Depositar ( 1 ), Retirar ( 2 )\n";
+        cout << "Transferir ( 3 ), Ver saldo ( 4 )\n";
+        cout << "Extrato ( 5 )\n";
+        cout << "============== Sair ( -1 ) ==============\n";
+        cout << "Digite uma operação: ";
+        cin >> opcao;
+        cout << "=============================================\n";
 
+        if(opcao == 1){
+            double quant;
+            cout << "Digite a quantia desejada: ";
+            cin >> quant;
+
+            conta << quant;
+        }else if(opcao == 2){
+            double quant;
+            cout << "Digite a quantia desejada: ";
+            cin >> quant;
+
+            conta >> quant;
+        }else if (opcao == 3){
+            double quant;
+            long int num;
+
+            cout << "Ditige o número da conta que receberá a transferência: ";
+            cin >> num;
+
+            cout << "Digite a quantia desejada: ";
+            cin >> quant;
+
+            conta.transferir(quant, banco.achaConta(num));
+        }else if(opcao == 4){
+            cout << "\n\n\n ======= Saldo =======\n";
+            cout << "Seu saldo é de: " << conta.getSaldo() << endl;
+            cout << "==========================\n" <<endl;
+        }else if(opcao == 5){
+            conta.extrato();
+        }else{
+            break;
+        }
+
+    }
 }
 
 int main(){
@@ -152,10 +197,7 @@ int main(){
         long int conta;
         cout << "Digite o número de sua conta: ";
         cin >> conta;
-
-        for(int i = 0; i < banco.getNum(); i ++){
-
-        }
+        gerenciarConta(banco, banco.achaConta(conta));
     }
     
     return 0;
