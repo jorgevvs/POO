@@ -61,7 +61,7 @@ void gerenciarBanco(Banco &banco){
     cout << "============== Sair ( -1 ) ==============\n";
     cout << "Digite uma operação: ";
     cin >> opcao;
-    cout << "===============================\n";
+    cout << "===============================\n\n\n" << endl;
 
     if(opcao == 1){
         string correntista;
@@ -186,7 +186,7 @@ int main(){
     Banco banco("BIF", 5123125, "Banco do IF");
     int operacao = 0;
 
-    cout << "=================  Banco BIF   ===============\n" ;
+    cout << "\n\n=================  Banco BIF   ===============\n" ;
     cout << "Deseja entrar como gerente ( 1 ) ou correntista? ( 2 ): " ;
     cin >> operacao;
     cout << "==============================================\n" << endl;
