@@ -7,6 +7,7 @@ using std::cerr;
 
 #include "Pessoa.h"
 #include "Saldo_Insuficiente_Error.h"
+#include "ExcedeLimiteError.h"
 
 Conta::Conta(long int num, Pessoa &correntista, double saldo){
   this->numero = num;
@@ -42,18 +43,34 @@ void Conta::transferir(float valor, Conta & conta){
 }
 
 void Conta::operator>>(double valor){
-  try{
+  if(this->limite > 0){
+    try{
     if(this->saldo > valor){
       this->saldo -= valor;
       Transacao x("15/10/2021", valor, "Débito");
       this->transacoes.push_back(x);
       cont++;
-    }else{
-      throw saldo_insuficiente_error();
+      }else{
+        throw ExcedeLimite();
+      }
     }
-  }
-  catch(saldo_insuficiente_error &e){
-    cerr << e.what() << endl;
+    catch(ExcedeLimite &e){
+      cerr << e.what() << endl;
+    }
+  }else{
+    try{
+      if(this->saldo > valor){
+        this->saldo -= valor;
+        Transacao x("15/10/2021", valor, "Débito");
+        this->transacoes.push_back(x);
+        cont++;
+      }else{
+        throw saldo_insuficiente_error();
+      }
+    }
+    catch(saldo_insuficiente_error &e){
+      cerr << e.what() << endl;
+    }
   }
 }
 

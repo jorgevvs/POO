@@ -170,9 +170,12 @@ void gerenciarConta(Banco & banco, Conta & conta){
 
             conta.transferir(quant, banco.achaConta(num));
         }else if(opcao == 4){
-            cout << "\n\n\n ======= Saldo =======\n";
+            cout << "\n\n\n======== Saldo =========\n";
             cout << "Seu saldo é de: " << conta.getSaldo() << endl;
-            cout << "==========================\n" <<endl;
+            if(conta.getLimite() > 0){
+                cout << "Seu limite é de: " << conta.getLimite() << endl;
+            }
+            cout << "========================\n" <<endl;
         }else if(opcao == 5){
             conta.extrato();
         }else{
