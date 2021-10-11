@@ -34,12 +34,38 @@ void Conta::extrato() const{
 }
 
 void Conta::transferir(float valor, Conta & conta){
-  Transacao x("15/10/2021", valor, "Transferência");
-  this->transacoes.push_back(x);
-  cont ++;
-  
-  conta << valor;
-  saldo -= valor;
+    if(this->limite > 0){
+    try{
+    if(this->saldo > valor){
+      this->saldo -= valor;
+      Transacao x("15/10/2021", valor, "Transferência");
+      this->transacoes.push_back(x);
+      cont ++;
+      conta << valor;
+      }else{
+        throw ExcedeLimite();
+      }
+    }
+    catch(ExcedeLimite &e){
+      cerr << e.what() << endl;
+    }
+    }else{
+      try{
+        if(this->saldo > valor){
+          this->saldo -= valor;
+          Transacao x("15/10/2021", valor, "Transferência");
+          this->transacoes.push_back(x);
+          cont ++;
+          conta << valor;
+        }else{
+          throw saldo_insuficiente_error();
+        }
+      }
+      catch(saldo_insuficiente_error &e){
+        cerr << e.what() << endl;
+      }
+    }
+
 }
 
 void Conta::operator>>(double valor){
