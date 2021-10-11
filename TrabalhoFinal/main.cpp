@@ -56,8 +56,8 @@ void gerenciarBanco(Banco &banco){
     while(true){
     int opcao = 0;
     cout << "============= Conta Gerente =============\n";
-    cout << "Abrir conta( 1 ), Consultar Conta ( 2 )\n";
-    cout << "Atualizar Conta ( 3 ), Fechar Conta ( 4 )\n";
+    cout << "Abrir conta( 1 )    Consultar Conta ( 2 )\n";
+    cout << "Atualizar Conta ( 3 )  Fechar Conta ( 4 )\n";
     cout << "============== Sair ( -1 ) ==============\n";
     cout << "Digite uma operação: ";
     cin >> opcao;
@@ -138,13 +138,13 @@ void gerenciarConta(Banco & banco, Conta & conta){
     while(true){
         int opcao = 0;
         cout << "\n\n\n=========== Conta Correntista ===========\n";
-        cout << "Depositar ( 1 ), Retirar ( 2 )\n";
-        cout << "Transferir ( 3 ), Ver saldo ( 4 )\n";
-        cout << "Extrato ( 5 )\n";
+        cout << "   Depositar ( 1 )        Retirar ( 2 )\n";
+        cout << "  Transferir ( 3 )      Ver saldo ( 4 )\n";
+        cout << "             Extrato ( 5 )\n";
         cout << "============== Sair ( -1 ) ==============\n";
         cout << "Digite uma operação: ";
         cin >> opcao;
-        cout << "=============================================\n";
+        cout << "=========================================\n";
 
         if(opcao == 1){
             double quant;
@@ -189,10 +189,10 @@ int main(){
     Banco banco("BIF", 5123125, "Banco do IF");
     int operacao = 0;
 
-    cout << "\n\n=================  Banco BIF   ===============\n" ;
+    cout << "\n\n======================  Banco BIF  ====================== \n\n" ;
     cout << "Deseja entrar como gerente ( 1 ) ou correntista? ( 2 ): " ;
     cin >> operacao;
-    cout << "==============================================\n" << endl;
+    cout << "\n=========================================================\n" << endl;
 
     if(operacao == 1){
         gerenciarBanco(banco);
